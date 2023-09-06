@@ -1,0 +1,34 @@
+@charset"UTF-8";
+
+.rsttop-search__title{
+    font-family: 'M PLUS Rounded 1c';
+    font-size: 30px;
+}
+
+.rsttop-area-search__items{
+    display: inline-block;
+    
+}
+
+.rsttop-area-search__item img{
+    width: 50px;
+    height: 30px;
+}
+
+.rsttop-othersearch__main{
+    margin-top: 100px;
+}
+
+.rsttop-othersearch__item img{
+    width: 20%;
+    float:left;
+}
+
+.rsttop-othersearch__item{
+    margin-right: : 20px;
+}
+
+.rsttop-servicesearch__item img{
+    width: 15%;
+    float: left;
+}

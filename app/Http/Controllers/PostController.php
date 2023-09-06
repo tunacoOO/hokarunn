@@ -11,4 +11,14 @@ class PostController extends Controller
     {
         return $post->get();
     }
+    
+    public function post()
+    {
+       return view('posts.index')->with(['posts' => $post->get()]); 
+    }
+    
+    public function create()
+    {
+        return view('posts.create');
+    }
 }
