@@ -13,10 +13,13 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        <img style="width: 70px;" src="{{ asset('images/IMG_1289.png') }}">
+                        <img style="width: 90px;" src="{{ asset('images/IMG_1339.jpg') }}">
                     </x-nav-link>
-                    <x-nav-link :href="route('index')" :active="request()->routeIs('index')">
+                    <x-nav-link :href="route('top')" :active="request()->routeIs('top')">
                         {{ __('Index')}}
+                    </x-nav-link>
+                    <x-nav-link :href="route('posts.create')" :active="request()->routeIs('posts.create')">
+                        <img style="width: 90px;" src="{{ asset('images/IMG_1408.jpg') }}">
                     </x-nav-link>
                 </div>
             </div>

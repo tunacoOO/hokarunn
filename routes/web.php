@@ -31,5 +31,10 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/', [PostController::class, 'index'])->name('index')->middleware('auth');
-Route::get('/posts/create',[PostController::class,'create']);
+Route::get('/', [PostController::class, 'index'])->name('top')->middleware('auth');
+Route::get('/posts/create',[PostController::class,'create'])->name('posts.create');
+Route::post('/posts/create',[PostController::class,'imagePost'])->name('image.post');
+Route::post('/posts', [PostController::class, 'store']);
+Route::get('/posts/search',[PostController::class,'search'])->name('posts.search');
+Route::get('/search',[ArticleController::class,'search'])->name('articles.search');
+Route::get('/posts/{post}',[PostController::class,'show'])->name('posts.show');

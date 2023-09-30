@@ -4,41 +4,37 @@
         <meta charset="utf-8">
         <title>ホカるん投稿</title>
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" href="./css/create.css">
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600">
+        <link rel="stylesheet" href="{{ asset('./css/create.css') }}">
     </head>
     <body>
         <x-app-layout>
-            <form action="/posts" method="POST">
+            <form action="/posts" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="post_images">
-                    <input type="file" name="test">
+                    <input type="file" name="post[images]" value="{{ old('post.images') }}" />
+                    <p class="images__error" style="color:red">{{ $errors->first('post.images') }}</p>
                 </div>
                 <div class="post_body">
-                    <textarea name="post_body" placeholder="みんなにこれを伝えたい！"></textarea>
+                    <textarea name="post[body]" placeholder="みんなにこれを伝えたい！">{{ old('post.body') }}</textarea>
+                    <p class="body__error" style="color:red">{{ $errors->first('post.body') }}</p>
                 </div>
-                //県名、ホテル選択　カテゴリー化する
-                <div class="time">
-                    <input type="checkbox" name="time" value="breakfast">
-                    <label for="breakfast">朝食</label>
+                <div class="category">
+                    <h2>Category</h2>
+                    <select name="post[category_id]">
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+                    <select name="post[time_category_id]">
+                        @foreach($time_categories as $time_category)
+                            <option value="{{ $time_category->id }}">{{ $time_category->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
-                <div class="time">
-                    <input type="checkbox" name="time" value="lunch">
-                    <label for="lunch">昼食</label>
-                </div>
-                <div class="time">
-                    <input type="checkbox" name="time" value="dinner">
-                    <label for="dinner">夕食</label>
-                </div>
-                <div class="time">
-                    <input type="checkbox" name="time" value="afternoon">
-                    <label for="afternoon">アフタヌーンティー</label>
-                </div>
-                <div class="time">
-                    <input type="checkbox" name="time" value="service">
-                    <label for="service">サービス</label>
-                </div>
-                <input type="submit" value="投稿する"/>
+                <input type="submit" value="store"/>
             </form>
+            <img src="{{ asset(session('img_path')) }}" alt="">
             <div class="fotter">
                 <a href="/">back</a>
             </div>

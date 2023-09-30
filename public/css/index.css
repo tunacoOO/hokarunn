@@ -1,9 +1,10 @@
 @charset"UTF-8";
 
 .rsttop-search__title{
-    font-family: 'M PLUS Rounded 1c';
+    padding: 50px 0px;
     font-size: 30px;
 }
+
 
 .rsttop-area-search__items{
     display: inline-block;
@@ -11,24 +12,29 @@
 }
 
 .rsttop-area-search__item img{
-    width: 50px;
+    width: 15%;
     height: 30px;
 }
 
-.rsttop-othersearch__main{
-    margin-top: 100px;
-}
 
-.rsttop-othersearch__item img{
+.rsttop-othersearch__item{
     width: 20%;
+    margin: 0 auto;
     float:left;
 }
 
-.rsttop-othersearch__item{
-    margin-right: : 20px;
+.rsttop-othersearch__item img{
+    width: 200px;
+    border-radius: 30px;
+}
+
+.rsttop-servicesearch__item{
+    width: 20%;
+    margin: 0 auto;
+    float:left;
 }
 
 .rsttop-servicesearch__item img{
-    width: 15%;
-    float: left;
+    width: 200px;
+    border-radius: 30px;
 }
