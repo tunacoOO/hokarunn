@@ -14,6 +14,7 @@
                 <div class="post_images">
                     <input type="file" name="post[images]" value="{{ old('post.images') }}" />
                     <p class="images__error" style="color:red">{{ $errors->first('post.images') }}</p>
+                    <img src="{{ asset(session('img_path')) }}" alt="">
                 </div>
                 <div class="post_body">
                     <textarea name="post[body]" placeholder="みんなにこれを伝えたい！">{{ old('post.body') }}</textarea>
@@ -21,6 +22,11 @@
                 </div>
                 <div class="category">
                     <h2>Category</h2>
+                    <select type="text" class="form-control" name="post[prefecture]">
+                        @foreach(config('pref') as $key => $prefecture )
+                            <option value="{{ $key }}">{{ $prefecture }}</option>
+                        @endforeach
+                    </select>
                     <select name="post[category_id]">
                         @foreach($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -34,7 +40,6 @@
                 </div>
                 <input type="submit" value="store"/>
             </form>
-            <img src="{{ asset(session('img_path')) }}" alt="">
             <div class="fotter">
                 <a href="/">back</a>
             </div>

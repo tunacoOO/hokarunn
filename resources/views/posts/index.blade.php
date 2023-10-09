@@ -9,11 +9,16 @@
     </head>
     <body>
         <x-app-layout>
-            <form  action= "サイトURL" method="get" size=40>　　//サイトURL入れる
-                <input type="search" name="search" placeholder="キーワードを入力">
-                <input type="submit" name="submit" value="検索">
+            <form  action= "{{ route('category.search') }}" method="get" size=40>
+                <select name="post[category_id]">
+                    <option value="">カテゴリーを選択してください</option>
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                </select>
+                <buttun type="submit">検索</buttun>
             </form>
-            <a href='/posts/'>show</a>
+            <a href="">show</a>
              <section class="rsttop-area-search__main">
                 <div class="rsttop-search__heading">
                      <h2 class="rsttop-search__title">〚エリアから探す〛</h2>

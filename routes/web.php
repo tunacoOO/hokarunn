@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController; 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\TimeCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,8 +35,13 @@ require __DIR__.'/auth.php';
 
 Route::get('/', [PostController::class, 'index'])->name('top')->middleware('auth');
 Route::get('/posts/create',[PostController::class,'create'])->name('posts.create');
-Route::post('/posts/create',[PostController::class,'imagePost'])->name('image.post');
 Route::post('/posts', [PostController::class, 'store']);
-Route::get('/posts/search',[PostController::class,'search'])->name('posts.search');
+Route::get('/posts/{post}/edit',[PostController::class,'edit'])->name('posts.edit');
+Route::put('/posts/{post}',[PostController::class,'update'])->name('posts.update');
+Route::delete('/posts/{post}',[PostController::class,'delete'])->name('posts.delete');
+Route::post('/posts/{post}',[PostController::class,'imagePost'])->name('image.post');
+Route::get('/posts/search',[PostController::class,'index'])->name('category.search');
 Route::get('/search',[ArticleController::class,'search'])->name('articles.search');
 Route::get('/posts/{post}',[PostController::class,'show'])->name('posts.show');
+Route::get('/categories/{category}',[CategoryController::class,'show'])->name('category.show');
+Route::get('/time_categories/{time_category}',[TimeCategoryController::class,'time'])->name('category.time');
