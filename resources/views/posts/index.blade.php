@@ -34,7 +34,7 @@
                  <ul class="rsttop-othersearch__list">
                      <li class="rsttop-othersearch__items">
                          <div class="rsttop-othersearch__item">
-                             <a href="#">
+                             <a href="">
                                  <img  src="{{ asset('images/IMG_1329.jpg') }}" alt="和食">
                              </a>
                          </div>

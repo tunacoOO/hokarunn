@@ -12,4 +12,5 @@ class CategoryController extends Controller
         return view('categories.show')->with(['posts' => $category->getByCategory()]);
     }
     
+    
 }
