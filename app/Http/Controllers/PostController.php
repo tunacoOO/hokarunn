@@ -59,13 +59,20 @@ class PostController extends Controller
     
     public function create(Category $category,TimeCategory $time_category)
     {
+        $result = [
+            'pref' => [],
+            'categories' => [],
+            'time_categories' => [],
+        ];
+
         if($prefs = config('pref')){
-            return view('posts.create')->with(['prefs' => $prefs]);
+            $result['pref'] = $prefs;
         }else{
-            return view('posts.create')->with([
-                'categories' => $category->get(),
-                'time_categories' => $time_category->get()]);}
-                
+            $result['categories'] = $category->get();
+            $result['time_categories'] = $time_category->get();
+        }
+
+        return view('posts.create')->with($result);
     }
     
     
