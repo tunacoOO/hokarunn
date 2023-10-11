@@ -15,15 +15,36 @@ class PostController extends Controller
     {
         $categories = Category::get();
         $posts = Post::get();
-        return view(posts.index,[
+        return view('posts.index',[
             'categories' => $categories,
             'posts' => $posts
-            ]);
+        ]);
     
+    }
+
+    public function all(Request $request){
+        $post = new Post;
+
+        // カテゴリーで絞り込み
+        if($request->input('category_id')){
+            $post = $post->where('category_id', $request->input('category_id'));
+        }
+
+        // 投稿内容の部分一致で絞り込み
+        if($request->input('body')){
+            $post = $post->where('body', 'like', '%'.$request->input('body').'%');
+        }
+
+        $posts = $post->get();
+
+        return view('posts.all',[
+            'posts' => $posts
+        ]);
     }
     
     public function search(PostRequest $request,Category $category)
     {
+
         return view('post.show')->with(['categories' => $category->get()]);
         $category_id = $request->input('category');
         
