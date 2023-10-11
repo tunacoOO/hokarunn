@@ -40,7 +40,7 @@ Route::get('/posts/{post}/edit',[PostController::class,'edit'])->name('posts.edi
 Route::put('/posts/{post}',[PostController::class,'update'])->name('posts.update');
 Route::delete('/posts/{post}',[PostController::class,'delete'])->name('posts.delete');
 Route::post('/posts/{post}',[PostController::class,'imagePost'])->name('image.post');
-Route::get('/posts/search',[PostController::class,'index'])->name('category.search');
+Route::get('/posts/search',[PostController::class,'show'])->name('category.search');
 Route::get('/search',[ArticleController::class,'search'])->name('articles.search');
 Route::get('/posts/{post}',[PostController::class,'show'])->name('posts.show');
 Route::get('/categories/{category}',[CategoryController::class,'show'])->name('category.show');

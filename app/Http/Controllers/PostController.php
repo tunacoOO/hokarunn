@@ -11,18 +11,20 @@ use Illuminate\Support\Facades\Session;
 
 class PostController extends Controller
 {
-    public function index(Category $category)
+    public function index(Category $category,TimeCategory $time_category)
     {
-        return view('posts.index');
-        
+        if($prefs = config('pref')){
+            return view('posts.index')->with(['prefs' => $prefs]);
+        }else{
+            return view('posts.index')->with([
+                'categories' => $category->get(),
+                'time_categories' => $time_category->get()]);}
     
-    
-       
     }
     
     public function search(PostRequest $request,Category $category)
     {
-        return view('post.index')->with(['categories' => $category->get()]);
+        return view('post.show')->with(['categories' => $category->get()]);
         $category_id = $request->input('category');
         
         if($category_id == ""){
@@ -30,18 +32,19 @@ class PostController extends Controller
         }else{
             $post = Post::where('category_id',$category_id)->get();
         }
-        return view('posts.show',compact('posts'));
+       
     }
     
     
     public function create(Category $category,TimeCategory $time_category)
     {
-        return view('posts.create')->with([
-            'categories' => $category->get(),
-            'time_categories' => $time_category->get()]);
-            $prefs = config('pref');
+        if($prefs = config('pref')){
             return view('posts.create')->with(['prefs' => $prefs]);
-        
+        }else{
+            return view('posts.create')->with([
+                'categories' => $category->get(),
+                'time_categories' => $time_category->get()]);}
+                
     }
     
     
