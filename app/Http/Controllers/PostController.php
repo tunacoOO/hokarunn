@@ -11,14 +11,14 @@ use Illuminate\Support\Facades\Session;
 
 class PostController extends Controller
 {
-    public function index(Category $category,TimeCategory $time_category)
+    public function index(Category $category)
     {
-        if($prefs = config('pref')){
-            return view('posts.index')->with(['prefs' => $prefs]);
-        }else{
-            return view('posts.index')->with([
-                'categories' => $category->get(),
-                'time_categories' => $time_category->get()]);}
+        $categories = Category::get();
+        $posts = Post::get();
+        return view(posts.index,[
+            'categories' => $categories,
+            'posts' => $posts
+            ]);
     
     }
     

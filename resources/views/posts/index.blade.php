@@ -9,15 +9,7 @@
     </head>
     <body>
         <x-app-layout>
-            <form  action= "{{ route('category.search') }}" method="get" size=40>
-                <select name="post[category_id]">
-                    <option value="">カテゴリーを選択してください</option>
-                        @foreach($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                        @endforeach
-                </select>
-                <buttun type="submit">検索</buttun>
-            </form>
+            
             <a href="">show</a>
              <section class="rsttop-area-search__main">
                 <div class="rsttop-search__heading">
