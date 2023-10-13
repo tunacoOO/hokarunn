@@ -11,15 +11,37 @@ use Illuminate\Support\Facades\Session;
 
 class PostController extends Controller
 {
-    public function index(Category $category)
+    public function index(Category $category,TimeCategory $time_category)
     {
         $categories = Category::get();
+        $time_categories = TimeCategory::get();
         $posts = Post::get();
-        return view(posts.index,[
+        return view('posts.index',[
             'categories' => $categories,
+            'time_categories' => $time_category,
             'posts' => $posts
             ]);
     
+    }
+    
+    public function all(Request $request){
+        $post = new Post;
+
+        // カテゴリーで絞り込み
+        if($request->input('category_id')){
+            $post = $post->where('category_id', $request->input('category_id'));
+        }
+
+        // 投稿内容の部分一致で絞り込み
+        if($request->input('body')){
+            $post = $post->where('body', 'like', '%'.$request->input('body').'%');
+        }
+
+        $posts = $post->get();
+
+        return view('posts.all',[
+            'posts' => $posts
+        ]);
     }
     
     public function search(PostRequest $request,Category $category)
@@ -38,12 +60,18 @@ class PostController extends Controller
     
     public function create(Category $category,TimeCategory $time_category)
     {
-        if($prefs = config('pref')){
-            return view('posts.create')->with(['prefs' => $prefs]);
-        }else{
-            return view('posts.create')->with([
-                'categories' => $category->get(),
-                'time_categories' => $time_category->get()]);}
+        
+                
+        $categories = Category::get();
+        $time_categories = TimeCategory::get();
+        $pref = config('pref');
+        $posts = Post::get();
+        return view('posts.index',[
+            'categories' => $categories,
+            'time_categories' => $time_category,
+            'pref' => $pref,
+            'posts' => $posts
+            ]);
                 
     }
     

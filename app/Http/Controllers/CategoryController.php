@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Models\Category;
 
@@ -9,7 +10,12 @@ class CategoryController extends Controller
 {
     public function show(Category $category)
     {
-        return view('categories.show')->with(['posts' => $category->getByCategory()]);
+        $posts_rel = $category->posts()->get();
+
+        return view('categories.show')->with([
+            'category' => $category,
+            'posts' => $posts_rel,
+        ]);
     }
     
     

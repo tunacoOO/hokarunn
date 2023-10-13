@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Post extends Model
 {
     use HasFactory;
-    use SoftDeletes;
     protected $fillable = [
     'images',
     'body',
@@ -18,16 +17,20 @@ class Post extends Model
     'prefecture'
 ];
 
-public function category()
-{
-    return $this->belongsTo(Category::class);
-}
-
-public function time_category()
-{
-    return $this->belongsTo(TimeCategory::class);
-}
-
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+    
+    public function time_category()
+    {
+        return $this->belongsTo(TimeCategory::class);
+    }
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
 
 
