@@ -9,7 +9,11 @@
     </head>
     <body>
         <x-app-layout>
-            <h1>Blog Name</h1>
+           <h1 style="padding: 1rem; display: flex; font-size: 1.5rem">
+                <img style="height: 1em" src="{{ asset('images/dish_icon/' . $time_category->timecode . '.jpg') }}" alt="{{ $time_category->name }}">
+                {{ $time_category->name }}
+            </h1>
+            <hr>
         <div class='posts'>
             @foreach ($posts as $post)
                 <div class='post'>

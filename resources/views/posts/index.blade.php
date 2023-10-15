@@ -9,106 +9,65 @@
     </head>
     <body>
         <x-app-layout>
-            <form  action= "{{ route('category.search') }}" method="get" size=40>
-                <select name="post[category_id]">
-                    <option value="">カテゴリーを選択してください</option>
-                        @foreach($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+            <form action="{{route('posts.all')}}" style="margin-top: 1rem;">
+               <select type="text" class="form-control" name="post[prefecture]">
+                        @foreach(config('pref') as $key => $prefecture )
+                            <option value="{{ $key }}">{{ $prefecture }}</option>
                         @endforeach
+                    </select>
+               
+                <select name="category_id">
+                    <option value="">すべて</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
                 </select>
-                <buttun type="submit">検索</buttun>
+                
+                <select name="time_category_id">
+                    <option value="">すべて</option>
+                    @foreach($time_categories as $time_category)
+                        <option value="{{ $time_category->id }}">{{ $time_category->name }}</option>
+                    @endforeach
+                </select>
+                
+                <input type="text" name="body" placeholder="キーワード">
+                <button>検索</button>
             </form>
-            <a href="">show</a>
-             <section class="rsttop-area-search__main">
-                <div class="rsttop-search__heading">
-                     <h2 class="rsttop-search__title">〚エリアから探す〛</h2>
-                     <div class="js-japanMap">
-                         <script src="{{ asset('/blog/resources/js/japan-map.js') }}"></script>
-                     </div>
-                </div>
-             </section>
+
+            <a href="{{route('posts.all')}}">投稿一覧</a>
+             
              <secion class="rsttop-othersearch__main">
                  <div class="rsttop-search__heading">
                      <h2 class="rsttop-search__title">〚料理カテゴリーから探す〛</h2>
-                 </div>
-                 <ul class="rsttop-othersearch__list">
-                     <li class="rsttop-othersearch__items">
+                 
+                         
+                 <div>
+                    @foreach($categories as $category)
                          <div class="rsttop-othersearch__item">
-                             <a href="">
-                                 <img  src="{{ asset('images/IMG_1329.jpg') }}" alt="和食">
+                             <a href="{{route('category.show', ['category' => $category->id])}}">
+                                 <img src="{{ asset('images/dish_icon/' . $category->code . '.jpg') }}" alt="{{ $category->name }}">
                              </a>
                          </div>
-                         <div class="rsttop-othersearch__item">
-                             <a href="#">
-                                <img src="{{ asset('images/IMG_1330.jpg') }}" alt="中華">
-                             </a>
-                         </div>
-                         <div class="rsttop-othersearch__item">
-                             <a href="#">
-                                <img src="{{ asset('images/IMG_1331.jpg') }}" alt="イタリアン">
-                             </a>
-                         </div>
-                         <div class="rsttop-othersearch__item">
-                             <a href="#">
-                                <img src="{{ asset('images/IMG_1332.jpg') }}" alt="フレンチ">
-                             </a>
-                         </div>
-                         <div class="rsttop-othersearch__item">
-                             <a href="#">
-                                <img src="{{ asset('images/IMG_1333.jpg') }}" alt="ブッフェ">
-                             </a>
-                         </div>
-                     </li>
-                 </ul>
+                    @endforeach
+                </div>
              </secion>
+             
+             
              <section class="rsttop-servicesearch__main">
                  <div class="rsttop-search__heading">
                      <h2 class="rsttop-search__title">〚状況から探す〛</h2>
                  </div>
-                 <ul class="rsttop-servicesearch__list">
-                     <li class="rsttop-servicesearch__items">
-                         <div class="rsttop-servicesearch__item">
-                             <a href="#">
-                                <img src="{{ asset('images/IMG_1334.jpg') }}" alt="朝食">
+                 <div>
+                    @foreach($time_categories as $time_category)
+                         <div class="rsttop-othersearch__item">
+                             <a href="{{route('category.time', ['time_category' => $time_category->id])}}">
+                                 <img src="{{ asset('images/time_icon/' . $time_category->timecode . '.jpg') }}" alt="{{ $time_category->name }}">
                              </a>
                          </div>
-                         <div class="rsttop-servicesearch__item">
-                             <a href="#">
-                                 <img src="{{ asset('images/IMG_1335.jpg') }}" alt="昼食">
-                             </a>
-                         </div>
-                         <div class="rsttop-servicesearch__item">
-                             <a href="#">
-                                 <img src="{{ asset('images/IMG_1336.jpg') }}" alt="夕食">
-                             </a>
-                         </div>
-                         <div class="rsttop-servicesearch__item">
-                             <a href="#">
-                                <img src="{{ asset('images/IMG_1337.jpg') }}" alt="アフタヌーンティー">
-                             </a>
-                         </div>
-                         <div class="rsttop-servicesearch__item">
-                             <a href="#">
-                                <img src="{{ asset('images/IMG_1338.jpg') }}" alt="サービス">
-                             </a>
-                         </div>
-                         //ルームサービスやアフタヌーンティー、朝食夕食等をカテゴリー化
-                     </li>
-                 </ul>
-             </section>
-             <secion class="rsttop-postsearch__main">
-                 <div class="rsttop-postsearch__heading">
-                     <h2 class="rsttop-search__title">〚みんなの投稿〛</h2>
-                 </div>
-                 <ul class="rsttop-postsearch__list">
-                     <li class="rsttop-postsearch__item">
-                         //４つくらい抜粋した投稿が表示される
-                     </li>
-                     <buttun type="buttun" name="buttun" value="value">もっと見る</buttun>
-                 </ul>
+                    @endforeach
+                </div>
+                 
              </secion>
          </x-app-layout>
-         <script src="{{ asset('/blog/public/jQuery/jquery-3.7.1.min.js') }}"></script>
-         <script src="{{ asset('/blog/public/jQuery/jquery.japan-map.min.js') }}"></script>
     </body>
 </html>

@@ -13,7 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::table('categories', function (Blueprint $table) {
+            $table->string('code');  //カラム追加
         });
     }
 
@@ -24,6 +25,14 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::table('categories', function (Blueprint $table) {
+            $table->dropColumn('code');  //カラムの削除
+        });
     }
 };
+
+
+
+
+
+

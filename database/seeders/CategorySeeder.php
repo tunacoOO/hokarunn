@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -15,29 +16,27 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
+       
+       
         DB::table('categories')->insert([
-            'id' => 1,
-            'name' => '',
-        ]);
-        DB::table('categories')->insert([
-            'id' => 2,
             'name' => '和食',
+            'code' => 'japanese'
         ]);
         DB::table('categories')->insert([
-            'id' => 3,
             'name' => '中華',
+            'code' => 'chinese'
         ]);
         DB::table('categories')->insert([
-            'id' => 4,
             'name' => 'フレンチ',
+            'code' => 'french'
         ]);
         DB::table('categories')->insert([
-            'id' => 5,
             'name' => 'イタリアン',
+            'code' =>'italian'
         ]);
         DB::table('categories')->insert([
-            'id' => 6,
             'name' => 'ブッフェ',
+            'code' => 'buffet'
         ]);
            
             
