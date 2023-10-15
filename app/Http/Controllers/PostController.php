@@ -18,18 +18,22 @@ class PostController extends Controller
         $posts = Post::get();
         return view('posts.index',[
             'categories' => $categories,
-            'time_categories' => $time_category,
+            'time_categories' => $time_categories,
             'posts' => $posts
             ]);
     
     }
     
-    public function all(Request $request){
+    public function all(Request $request,Post $post){
         $post = new Post;
 
         // カテゴリーで絞り込み
         if($request->input('category_id')){
             $post = $post->where('category_id', $request->input('category_id'));
+        }
+        
+        if($request->input('time_category_id')){
+            $post = $post->where('time_category_id',$request->input('time_category_id'));
         }
 
         // 投稿内容の部分一致で絞り込み
@@ -40,7 +44,7 @@ class PostController extends Controller
         $posts = $post->get();
 
         return view('posts.all',[
-            'posts' => $posts
+            'posts' => $post ->get()
         ]);
     }
     
@@ -61,14 +65,15 @@ class PostController extends Controller
     public function create(Category $category,TimeCategory $time_category)
     {
         
-                
+          
+        
         $categories = Category::get();
         $time_categories = TimeCategory::get();
         $pref = config('pref');
         $posts = Post::get();
-        return view('posts.index',[
+        return view('posts.create',[
             'categories' => $categories,
-            'time_categories' => $time_category,
+            'time_categories' => $time_categories,
             'pref' => $pref,
             'posts' => $posts
             ]);
@@ -76,10 +81,7 @@ class PostController extends Controller
     }
     
     
-    public function show(Post $post)
-    {
-        return view('posts.show')->with(['posts' => $post->get()]);  
-    }
+   
     
     public function store(PostRequest $request,Post $post)
     {

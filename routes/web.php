@@ -40,6 +40,6 @@ Route::delete('/posts/{post}',[PostController::class,'delete'])->name('posts.del
 Route::post('/posts/{post}',[PostController::class,'imagePost'])->name('image.post');
 Route::get('/posts/search',[PostController::class,'show'])->name('category.search');
 Route::get('/search',[ArticleController::class,'search'])->name('articles.search');
-Route::get('/posts',[PostController::class,'all'])->name('posts.all');
+Route::get('/posts/{post?}',[PostController::class,'all'])->name('posts.all');
 Route::get('/categories/{category}',[CategoryController::class,'show'])->name('category.show');
 Route::get('/time_categories/{time_category}',[TimeCategoryController::class,'time'])->name('category.time');

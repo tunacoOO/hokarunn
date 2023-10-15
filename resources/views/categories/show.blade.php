@@ -23,11 +23,38 @@
                         </div>
                         <div style="margin-left: 1em;">
                             <p class='body'>{{ $post->body }}</p>
+                            <p>{{ $post->prefecture }}</p>
                             <a href="/categories/{{ $post->category->id }}">{{ $post->category->name }}</a>
                             <a href="/time_categories/{{ $post->time_category->id }}">{{ $post->time_category->name }}</a>
+                           
+                            @if($post->user_id == Auth::id())
+                            <div style="display: flex; justify-content: end; align-items: end">
+                                <div class="edit" style="margin-right: 1rem"><a href="{{route('posts.edit', ['post' => $post->id])}}">edit</a></div>
+                                <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="button" onclick="deletePost({{ $post->id }})">delete</button>
+                                </form>
+                            </div>
+                            @endif
+                        <div style="text-align: right; color: red;">
+                            <small style="margin-left: 2rem;">{{is_null($post->user) ? '': $post->user->name}}</small>
+                        </div>
+                    </div>
+                </div>
                         </div>
                     </div>
                 @endforeach
             </div>
+            
+            <script>
+            function deletePost(id) {
+                'use strict'
+        
+                if (confirm('削除すると復元できません。\n本当に削除しますか？')) {
+                    document.getElementById(`form_${id}`).submit();
+                }
+            }
+        </script>
         </x-app-layout>
     </body>
