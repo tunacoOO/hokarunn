@@ -6,6 +6,7 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600">
         <link rel="stylesheet" href="{{ asset('./css/create.css') }}">
+        @livewireStyles
     </head>
     <body>
         <x-app-layout>
@@ -43,5 +44,6 @@
             <div class="fotter">
                 <a href="/">back</a>
             </div>
+            @livewireScripts
         </x-app-layout>
     </body>

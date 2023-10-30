@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-       Schema::table('posts', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id')->change();  //カラム追加
-            $table->foreign('user_id')->reference('id')->on('users');
+        Schema::table('posts', function (Blueprint $table) {
+            $table->unsignedBigInteger('prefecture_id')->nullable();
+            $table->foreign('prefecutre_id')->references('id')->on('mst_prefectures');
         });
     }
 
@@ -27,7 +27,8 @@ return new class extends Migration
     public function down()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->dropColumn('user_id');  //カラムの削除
+            $table->dropForeign(['prefecure_id']);
+            $table->dropColumn('prefecure_id');
         });
     }
 };

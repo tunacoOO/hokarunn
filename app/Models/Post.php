@@ -14,7 +14,8 @@ class Post extends Model
     'body',
     'category_id',
     'time_category_id',
-    'prefecture'
+    'prefecture_id',
+    'user_id'
 ];
 
     public function category()

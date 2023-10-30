@@ -9,6 +9,7 @@ use App\Models\TimeCategory;
 use App\Http\Requests\PostRequest;
 use Illuminate\Support\Facades\Session;
 
+
 class PostController extends Controller
 {
     public function index(Category $category,TimeCategory $time_category)
@@ -75,7 +76,6 @@ class PostController extends Controller
             'categories' => $categories,
             'time_categories' => $time_categories,
             'pref' => $pref,
-            'posts' => $posts
             ]);
                 
     }
@@ -87,8 +87,9 @@ class PostController extends Controller
     {
         $input = $request['post'];
         $images = $request->file('images');
-        $post->fill($input)->save();
         $post->prefecture = $request->input('prefecture');
+        $post->fill($input)->save();
+        
         $file = $request->file('post.images');
         $file_path = $file->store('public');
         Session::put('img_path', str_replace('public', 'storage', $file_path));
@@ -97,7 +98,10 @@ class PostController extends Controller
     
     public function edit(Post $post,Category $category,TimeCategory $time_category)
     {
+        
+         $pref = config('pref');
         return view('posts.edit')->with([
+            'pref' => $pref,
             'post' => $post,
             'categories' => $category->get(),
             'time_categories' => $time_category->get(),

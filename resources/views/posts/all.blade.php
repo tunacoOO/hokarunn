@@ -14,13 +14,14 @@
             @foreach ($posts as $post)
                 <div class='post' style="padding: 1rem; margin-bottom: 1rem; border: 1px solid dimgray; display: flex;">
                     <div style="width: 4em;">
-                        <img src="{{ asset('' . $post->image) }}" alt="aaa" class="post_images">
+                        <img src="{{ asset('img_path') }}" alt="" class="post_images">
                     </div>
                     <div style="flex-grow: 1">
                         <p class='body'>{{ $post->body }}</p>
                         <p>{{ $post->prefecture }}</p>
                         <a href="/categories/{{ $post->category->id }}">{{ $post->category->name }}</a>
                         <a href="/time_categories/{{ $post->time_category->id }}">{{ $post->time_category->name }}</a>
+                        
                         @if($post->user_id == Auth::id())
                             <div style="display: flex; justify-content: end; align-items: end">
                                 <div class="edit" style="margin-right: 1rem"><a href="{{route('posts.edit', ['post' => $post->id])}}">edit</a></div>

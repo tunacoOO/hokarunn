@@ -19,7 +19,7 @@
                     <div class='post' style="margin-bottom: 1em; padding: 1em; border: 1px solid black; border-radius: 5px; display: flex;">
                         <div style="width: 5em;">
 {{--                            <img src="{{ asset('images/dish_post/' . $post->images) }}" alt={{"投稿画像" . $post->id}}>--}}
-                            <img src="{{ asset('images/dish_icon/chinese.jpg') }}" alt={{"投稿画像" . $post->id}}>
+                            <img src="{{ asset('img_path') }}" alt={{"投稿画像" . $post->id}}>
                         </div>
                         <div style="margin-left: 1em;">
                             <p class='body'>{{ $post->body }}</p>
