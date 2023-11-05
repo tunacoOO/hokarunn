@@ -36,6 +36,10 @@ class PostController extends Controller
         if($request->input('time_category_id')){
             $post = $post->where('time_category_id',$request->input('time_category_id'));
         }
+        
+        if($request->input('prefecutre_id')){
+            $post = $post->where('prefecure_id',$request->input('prefecure_id'));
+        }
 
         // 投稿内容の部分一致で絞り込み
         if($request->input('body')){
@@ -45,7 +49,7 @@ class PostController extends Controller
         $posts = $post->get();
 
         return view('posts.all',[
-            'posts' => $post ->get()
+            'posts' => $posts
         ]);
     }
     
@@ -75,7 +79,6 @@ class PostController extends Controller
         return view('posts.create',[
             'categories' => $categories,
             'time_categories' => $time_categories,
-            'pref' => $pref,
             ]);
                 
     }
@@ -87,7 +90,7 @@ class PostController extends Controller
     {
         $input = $request['post'];
         $images = $request->file('images');
-        $post->prefecture = $request->input('prefecture');
+        $post->prefecture_id  = $request->pref;
         $post->fill($input)->save();
         
         $file = $request->file('post.images');

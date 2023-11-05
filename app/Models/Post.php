@@ -32,6 +32,11 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
+    
+    public function getPrefNameAttribute() 
+    {
+        return config('pref.'.$this->prefecture_id);
+    }
 }
 
 
