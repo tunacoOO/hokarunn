@@ -88,7 +88,7 @@ class PostController extends Controller
         $input = $request['post'];
         $images = $request->file('images');
         $post->fill($input)->save();
-        $post->prefecture = $request->input('prefecture');
+        $post->pref_id = $request->pref;
         $file = $request->file('post.images');
         $file_path = $file->store('public');
         Session::put('img_path', str_replace('public', 'storage', $file_path));

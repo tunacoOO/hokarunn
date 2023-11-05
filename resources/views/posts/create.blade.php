@@ -23,9 +23,9 @@
                 <div class="category">
                     <h2>Category</h2>
                     <select type="text" class="form-control" name="post[prefecture]">
-                        @foreach(config('pref') as $key => $prefecture )
-                            <option value="{{ $key }}">{{ $prefecture }}</option>
-                        @endforeach
+                         @foreach(config('pref') as $index => $name)
+                            <option value="{{ $index }}">$name</option>
+                          @endforeach
                     </select>
                     <select name="post[category_id]">
                         @foreach($categories as $category)
