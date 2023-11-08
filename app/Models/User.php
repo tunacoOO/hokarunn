@@ -47,6 +47,11 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);  
     }
     
+    public function user()
+    {
+        return $this->hasMany(Post::class);
+    }
+    
     public function getPrefNameAttribute() 
     {
          return config('pref.'.$this->pref_id);

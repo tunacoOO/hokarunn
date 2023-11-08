@@ -23,7 +23,7 @@
                         </div>
                         <div style="margin-left: 1em;">
                             <p class='body'>{{ $post->body }}</p>
-                            <p>{{ $post->prefecture }}</p>
+                            <p>{{ $post->prefName }}</p>
                             <a href="/categories/{{ $post->category->id }}">{{ $post->category->name }}</a>
                             <a href="/time_categories/{{ $post->time_category->id }}">{{ $post->time_category->name }}</a>
                            

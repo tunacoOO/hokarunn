@@ -23,7 +23,7 @@
                 </div>
                 <div class="category">
                     <h2>Category</h2>
-                    <select type="text" class="form-control" name="post[prefecture]">
+                    <select type="text" class="form-control" name="post[prefecture_id]">
                         @foreach(config('pref') as $key => $prefecture )
                             <option value="{{ $key }}">{{ $prefecture }}</option>
                         @endforeach

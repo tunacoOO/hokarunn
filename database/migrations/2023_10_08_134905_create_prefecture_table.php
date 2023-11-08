@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-       Schema::table('posts', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id')->change();  //カラム追加
-            $table->foreign('user_id')->reference('id')->on('users');
+        Schema::create('prefecture', function (Blueprint $table) {
+            $table->id();
+            $table->string('name',50);
+            $table->timestamps();
         });
     }
 
@@ -26,9 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
-            $table->dropColumn('user_id');  //カラムの削除
-        });
+        Schema::dropIfExists('prefecture');
     }
 };
