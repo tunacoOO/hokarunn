@@ -9,6 +9,7 @@ use App\Models\TimeCategory;
 use App\Http\Requests\PostRequest;
 use Illuminate\Support\Facades\Session;
 
+
 class PostController extends Controller
 {
     public function index(Category $category,TimeCategory $time_category)
@@ -35,6 +36,10 @@ class PostController extends Controller
         if($request->input('time_category_id')){
             $post = $post->where('time_category_id',$request->input('time_category_id'));
         }
+        
+        if($request->input('prefecutre_id')){
+            $post = $post->where('prefecure_id',$request->input('prefecure_id'));
+        }
 
         // 投稿内容の部分一致で絞り込み
         if($request->input('body')){
@@ -44,7 +49,7 @@ class PostController extends Controller
         $posts = $post->get();
 
         return view('posts.all',[
-            'posts' => $post ->get()
+            'posts' => $posts
         ]);
     }
     
@@ -74,8 +79,6 @@ class PostController extends Controller
         return view('posts.create',[
             'categories' => $categories,
             'time_categories' => $time_categories,
-            'pref' => $pref,
-            'posts' => $posts
             ]);
                 
     }
@@ -87,8 +90,9 @@ class PostController extends Controller
     {
         $input = $request['post'];
         $images = $request->file('images');
+        $post->prefecture_id  = $request->pref;
         $post->fill($input)->save();
-        $post->prefecture = $request->input('prefecture');
+        
         $file = $request->file('post.images');
         $file_path = $file->store('public');
         Session::put('img_path', str_replace('public', 'storage', $file_path));
@@ -97,7 +101,10 @@ class PostController extends Controller
     
     public function edit(Post $post,Category $category,TimeCategory $time_category)
     {
+        
+         $pref = config('pref');
         return view('posts.edit')->with([
+            'pref' => $pref,
             'post' => $post,
             'categories' => $category->get(),
             'time_categories' => $time_category->get(),
@@ -109,7 +116,7 @@ class PostController extends Controller
         $input_post = $request['post'];
         $images = $request->file('images');
         $post->fill($input)->save();
-        $post->prefecture = $request->input('prefecture');
+        $post->prefecture_id = $request->input('prefecture_id');
         $file = $request->file('post.images');
         $file_path = $file->store('public');
         Session::put('img_path', str_replace('public', 'storage', $file_path));

@@ -18,7 +18,7 @@
                     </div>
                     <div style="flex-grow: 1">
                         <p class='body'>{{ $post->body }}</p>
-                        <p>{{ $post->prefecture }}</p>
+                        <p>{{ $post->prefName }}</p>
                         <a href="/categories/{{ $post->category->id }}">{{ $post->category->name }}</a>
                         <a href="/time_categories/{{ $post->time_category->id }}">{{ $post->time_category->name }}</a>
                         @if($post->user_id == Auth::id())
