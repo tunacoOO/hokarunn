@@ -17,10 +17,9 @@ class CategorySeeder extends Seeder
     public function run()
     {
        
-       
         DB::table('categories')->insert([
             'name' => '和食',
-            'code' => 'japanese'
+            'code' =>'japanese'
         ]);
         DB::table('categories')->insert([
             'name' => '中華',
@@ -32,7 +31,7 @@ class CategorySeeder extends Seeder
         ]);
         DB::table('categories')->insert([
             'name' => 'イタリアン',
-            'code' =>'italian'
+            'code' => 'italian'
         ]);
         DB::table('categories')->insert([
             'name' => 'ブッフェ',
